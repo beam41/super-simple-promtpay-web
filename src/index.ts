@@ -17,8 +17,8 @@ function nameIsChange() {
 
 function shouldDisable() {
   if (nodeList.firstChild?.lastChild)
-  (nodeList.firstChild.lastChild as HTMLButtonElement).disabled =
-    nodeList.childNodes.length == 1;
+    (nodeList.firstChild.lastChild as HTMLButtonElement).disabled =
+      nodeList.childNodes.length == 1;
 }
 
 function inputBlockGenerate(nameValue: string = "") {
@@ -86,24 +86,33 @@ async function generateAll() {
       node.className = "qr-child";
       const genDat = generate(phoneNum.value, am.value);
 
-      try {
-        const nameDiv = document.createElement("div");
-        nameDiv.className = "qr-label";
-        nameDiv.innerHTML = `${name.value} - ${(+am.value).toFixed(2)} บาท`;
+      const nameDiv = document.createElement("div");
+      nameDiv.className = "qr-label";
+      nameDiv.innerHTML = `${name.value} - ${(+am.value).toFixed(2)} บาท`;
+      node.appendChild(nameDiv);
 
+      try {
         const img = document.createElement("img");
         img.src = await qrcode.toDataURL(genDat);
-
-        const spacerDiv = document.createElement("div");
-        spacerDiv.innerHTML = "\n";
-
-        node.appendChild(nameDiv);
         node.appendChild(img);
-        node.appendChild(spacerDiv);
       } catch (err) {
         console.error(err);
       }
+
       nodeCover.appendChild(node);
+
+      const spacerDiv1 = document.createElement("div");
+      spacerDiv1.innerHTML = "\n";
+      spacerDiv1.className = 'hidden';
+      const spacerDiv2 = document.createElement("div");
+      spacerDiv2.innerHTML = "\n";
+      spacerDiv2.className = 'hidden';
+      const hr = document.createElement("hr");
+      hr.className = 'hidden';
+      nodeCover.appendChild(spacerDiv1);
+      nodeCover.appendChild(hr);
+      nodeCover.appendChild(spacerDiv2);
+
       outputDiv.appendChild(nodeCover);
     }
   }

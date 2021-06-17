@@ -181,3 +181,12 @@ button:not(:first-child) {
 .qr-child img {
   border-radius: 4px;
 }
+
+.hidden {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 0;
+  height: 0;
+  border:none;
+}
