@@ -8,12 +8,17 @@
     <link rel="stylesheet" type="text/css" href="/index.css" />
   </head>
   <body>
-        <input id='phone-num' type="tel" placeholder="เบอร์โทรศัพท์"/>
-        <br/>
+    <div class="input">
+      <input id="phone-num" type="tel" placeholder="เบอร์โทรศัพท์" />
+      <div class="btn-group">
         <button id="btn-add">Add</button>
-        <div id="list"></div>
+      </div>
+      <div id="list"></div>
+      <div class="btn-group">
         <button id="btn-submit">Generate</button>
         <button id="btn-copy">Copy</button>
+      </div>
+    </div>
     <div id="output"></div>
     <script type="module" src="/dist/index.js"></script>
   </body>

@@ -18,6 +18,7 @@ function nameIsChange() {
 function inputBlockGenerate(nameValue: string = "") {
   const nodename = document.createElement("input");
   nodename.type = "text";
+  nodename.className = "inp-name";
   nodename.placeholder = "ชื่อ";
   nodename.value = nameValue;
 
@@ -25,16 +26,18 @@ function inputBlockGenerate(nameValue: string = "") {
 
   const nodeam = document.createElement("input");
   nodeam.type = "number";
+  nodeam.className = "inp-amount";
   nodeam.placeholder = "จำนวน";
 
   const nodeDiv = document.createElement("div");
   nodeDiv.className = "inp-group";
 
   const nodeBthDel = document.createElement("button");
-  nodeBthDel.innerText = "remove";
-  nodeBthDel.className = "remove-btn";
+  nodeBthDel.innerText = "Remove";
+  nodeBthDel.className = "btn-remove";
   nodeBthDel.addEventListener("click", () => {
     nodeDiv.remove();
+    nameIsChange();
   });
 
   nodeDiv.appendChild(nodename);
@@ -69,18 +72,22 @@ async function generateAll() {
     const name = inpg.firstChild as HTMLInputElement;
     const am = inpg.firstChild.nextSibling as HTMLInputElement;
     if (phoneNum.value && name.value && am.value) {
+      const nodeCover = document.createElement("div");
+      nodeCover.className = "qr-child-cover";
       const node = document.createElement("div");
+      node.className = "qr-child";
       const genDat = generate(phoneNum.value, am.value);
 
       try {
         const nameDiv = document.createElement("div");
+        nameDiv.className = "qr-label";
         nameDiv.innerHTML = `${name.value} - ${(+am.value).toFixed(2)} บาท`;
 
         const img = document.createElement("img");
         img.src = await qrcode.toDataURL(genDat);
 
         const spacerDiv = document.createElement("div");
-        spacerDiv.innerHTML = "\u00A0";
+        spacerDiv.innerHTML = "\n";
 
         node.appendChild(nameDiv);
         node.appendChild(img);
@@ -88,8 +95,8 @@ async function generateAll() {
       } catch (err) {
         console.error(err);
       }
-
-      outputDiv.appendChild(node);
+      nodeCover.appendChild(node);
+      outputDiv.appendChild(nodeCover);
     }
   }
 
