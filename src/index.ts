@@ -15,6 +15,12 @@ function nameIsChange() {
   localStorage.setItem(LOCAL_STORAGE_NAME_LIST, JSON.stringify(b));
 }
 
+function shouldDisable() {
+  if (nodeList.firstChild?.lastChild)
+  (nodeList.firstChild.lastChild as HTMLButtonElement).disabled =
+    nodeList.childNodes.length == 1;
+}
+
 function inputBlockGenerate(nameValue: string = "") {
   const nodename = document.createElement("input");
   nodename.type = "text";
@@ -38,6 +44,7 @@ function inputBlockGenerate(nameValue: string = "") {
   nodeBthDel.addEventListener("click", () => {
     nodeDiv.remove();
     nameIsChange();
+    shouldDisable();
   });
 
   nodeDiv.appendChild(nodename);
@@ -50,6 +57,7 @@ function inputBlockGenerate(nameValue: string = "") {
 function newQrInp() {
   inputBlockGenerate();
   nameIsChange();
+  shouldDisable();
 }
 
 const phoneNum = document.getElementById("phone-num") as HTMLInputElement;
@@ -131,6 +139,7 @@ function init() {
   for (const name of JSON.parse(stroList) as string[]) {
     inputBlockGenerate(name);
   }
+  shouldDisable();
 }
 
 init();
