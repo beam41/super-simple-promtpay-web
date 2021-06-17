@@ -189,4 +189,9 @@ button:not(:first-child) {
   width: 0;
   height: 0;
   border:none;
+  overflow:hidden;
+}
+
+.qr-child-cover:last-child .hidden {
+  display: none;
 }
