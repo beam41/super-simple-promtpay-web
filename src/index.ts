@@ -34,12 +34,13 @@ function inputBlockGenerate(nameValue: string = "") {
   nodeam.type = "number";
   nodeam.className = "inp-amount";
   nodeam.placeholder = "จำนวน";
+  nodeam.min = "0";
 
   const nodeDiv = document.createElement("div");
   nodeDiv.className = "inp-group";
 
   const nodeBthDel = document.createElement("button");
-  nodeBthDel.innerText = "Remove";
+  nodeBthDel.innerHTML = `<svg style="width:25px;height:25px" viewBox="0 0 24 24"><path fill="currentColor" d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>`;
   nodeBthDel.className = "btn-remove";
   nodeBthDel.addEventListener("click", () => {
     nodeDiv.remove();
@@ -79,6 +80,7 @@ async function generateAll() {
   for (const inpg of nodeList.childNodes) {
     const name = inpg.firstChild as HTMLInputElement;
     const am = inpg.firstChild.nextSibling as HTMLInputElement;
+    if (am.value) am.value = Math.abs(+am.value).toFixed(2)
     if (phoneNum.value && name.value && am.value) {
       const nodeCover = document.createElement("div");
       nodeCover.className = "qr-child-cover";
@@ -88,7 +90,7 @@ async function generateAll() {
 
       const nameDiv = document.createElement("div");
       nameDiv.className = "qr-label";
-      nameDiv.innerHTML = `${name.value} - ${(+am.value).toFixed(2)} บาท`;
+      nameDiv.innerText = `${name.value} - ${(+am.value).toFixed(2)} บาท`;
       node.appendChild(nameDiv);
 
       try {
@@ -102,10 +104,10 @@ async function generateAll() {
       nodeCover.appendChild(node);
 
       const spacerDiv1 = document.createElement("div");
-      spacerDiv1.innerHTML = "\n";
+      spacerDiv1.innerText = "\n";
       spacerDiv1.className = 'hidden';
       const spacerDiv2 = document.createElement("div");
-      spacerDiv2.innerHTML = "\n";
+      spacerDiv2.innerText = "\n";
       spacerDiv2.className = 'hidden';
       const hr = document.createElement("hr");
       hr.className = 'hidden';
