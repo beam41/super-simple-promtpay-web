@@ -170,7 +170,16 @@ button:not(:first-child) {
 .btn-remove {
   display: flex;
   background: #d32f2f;
-  padding: 4px;
+  width: 33px;
+  height: 33px;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-remove > svg {
+  width: 23px;
+  height: 23px;
 }
 
 .btn-remove:hover {
