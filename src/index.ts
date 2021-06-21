@@ -76,50 +76,70 @@ async function generateAll() {
   while (outputDiv.firstChild) {
     outputDiv.firstChild.remove();
   }
+  outputDiv.className = "output-dogrid";
 
   for (const inpg of nodeList.childNodes) {
     const name = inpg.firstChild as HTMLInputElement;
     const am = inpg.firstChild.nextSibling as HTMLInputElement;
-    if (am.value) am.value = Math.abs(+am.value).toFixed(2)
-    if (phoneNum.value && name.value && am.value) {
-      const nodeCover = document.createElement("div");
-      nodeCover.className = "qr-child-cover";
-      const node = document.createElement("div");
-      node.className = "qr-child";
-      const genDat = generate(phoneNum.value, am.value);
+    if (am.value) am.value = Math.abs(+am.value).toFixed(2);
+    if (!(phoneNum.value && name.value && am.value)) break;
 
-      const nameDiv = document.createElement("div");
-      nameDiv.className = "qr-label";
-      nameDiv.innerText = `${name.value} - ${(+am.value).toFixed(2)} บาท`;
-      node.appendChild(nameDiv);
+    const nodeCover = document.createElement("div");
+    nodeCover.className = "qr-child-cover";
+    const node = document.createElement("div");
+    node.className = "qr-child";
+    const genDat = generate(phoneNum.value, am.value);
 
-      try {
-        const img = document.createElement("img");
-        img.src = await qrcode.toDataURL(genDat);
-        node.appendChild(img);
-      } catch (err) {
-        console.error(err);
+    const nameDiv = document.createElement("div");
+    nameDiv.className = "qr-label";
+    nameDiv.innerText = `${name.value} - ${(+am.value).toLocaleString(
+      'th-TH',
+      {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
       }
+    )} บาท`;
+    node.appendChild(nameDiv);
 
-      nodeCover.appendChild(node);
-
-      const spacerDiv1 = document.createElement("div");
-      spacerDiv1.innerText = "\n";
-      spacerDiv1.className = 'hidden';
-      const spacerDiv2 = document.createElement("div");
-      spacerDiv2.innerText = "\n";
-      spacerDiv2.className = 'hidden';
-      const hr = document.createElement("hr");
-      hr.className = 'hidden';
-      nodeCover.appendChild(spacerDiv1);
-      nodeCover.appendChild(hr);
-      nodeCover.appendChild(spacerDiv2);
-
-      outputDiv.appendChild(nodeCover);
+    try {
+      const img = document.createElement("img");
+      img.src = await qrcode.toDataURL(genDat, {
+        color: {
+          dark: "#000000D9",
+        },
+      });
+      node.appendChild(img);
+    } catch (err) {
+      console.error(err);
     }
+
+    nodeCover.appendChild(node);
+
+    const spacerDiv1 = document.createElement("div");
+    spacerDiv1.innerText = "\n";
+    spacerDiv1.className = "hidden";
+    const spacerDiv2 = document.createElement("div");
+    spacerDiv2.innerText = "\n";
+    spacerDiv2.className = "hidden";
+    const hr = document.createElement("hr");
+    hr.className = "hidden";
+    nodeCover.appendChild(spacerDiv1);
+    nodeCover.appendChild(hr);
+    nodeCover.appendChild(spacerDiv2);
+
+    outputDiv.appendChild(nodeCover);
   }
 
-  copyQr();
+  if (outputDiv.childNodes.length > 0) {
+    copyQr();
+    return;
+  }
+
+  outputDiv.className = "";
+  const placeholderDiv = document.createElement("div");
+  placeholderDiv.innerText = ":)";
+  placeholderDiv.className = "output-placeholder";
+  outputDiv.appendChild(placeholderDiv);
 }
 
 function copyQr() {

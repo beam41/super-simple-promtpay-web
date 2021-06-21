@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .btn-remove[disabled] {
@@ -19,16 +20,34 @@ body {
   flex: 1;
   max-width: 500px;
   overflow-y: auto;
+  z-index: 1;
 }
 
 #output {
   padding: 64px;
+}
+
+.output-cover {
   flex: 1;
+}
+
+.output-dogrid {
   overflow-y: auto;
   display: grid;
+  gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   justify-items: center;
-  gap: 16px;
+}
+
+.output-placeholder {
+  background: rgb(246, 246, 246);
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -64px;
+  color: rgb(170, 170, 170);
+  user-select: none;
 }
 
 @media (max-width: 768px) {
@@ -43,18 +62,23 @@ body {
 }
 
 @media (min-width: 769px) {
-  #output,
-  .input {
-    height: 100vh;
+  #output {
+    max-height: 100vh;
+  }
+
+  .output-placeholder {
+    height: calc(100vh);
   }
 
   .input {
+    height: 100vh;
     box-shadow: 0px 0px 5px -0px rgba(0, 0, 0, 0.25);
   }
 }
 
 @media (max-width: 425px) {
-  body > div {
+  body > .input,
+  body > #output {
     padding: 32px;
   }
 }
@@ -74,6 +98,10 @@ button {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+}
+
+button * {
+  color: white;
 }
 
 input {
@@ -120,7 +148,8 @@ button:not(:first-child) {
   background: #0e4686;
 }
 
-.inp-group, .btn-group {
+.inp-group,
+.btn-group {
   display: flex;
   margin-bottom: 1rem;
 }
