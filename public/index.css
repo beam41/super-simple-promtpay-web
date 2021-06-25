@@ -1,34 +1,10 @@
 * {
-  box-sizing: border-box;
   color: rgba(0, 0, 0, 0.85);
 }
 
 .btn-remove[disabled] {
   cursor: not-allowed;
   background-color: gray !important;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-.input {
-  padding: 64px;
-  flex: 1;
-  max-width: 500px;
-  overflow-y: auto;
-  z-index: 1;
-}
-
-#output {
-  padding: 64px;
-}
-
-.output-cover {
-  flex: 1;
 }
 
 .output-dogrid {
@@ -41,53 +17,12 @@ body {
 
 .output-placeholder {
   background: rgb(246, 246, 246);
-  height: 128px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: -64px;
   color: rgb(170, 170, 170);
   user-select: none;
 }
 
-@media (max-width: 768px) {
-  body {
-    flex-direction: column;
-  }
-
-  .input {
-    width: 100%;
-    margin: auto;
-  }
-}
-
-@media (min-width: 769px) {
-  #output {
-    max-height: 100vh;
-  }
-
-  .output-placeholder {
-    height: calc(100vh);
-  }
-
-  .input {
-    height: 100vh;
-    box-shadow: 0px 0px 5px -0px rgba(0, 0, 0, 0.25);
-  }
-}
-
-@media (max-width: 425px) {
-  body > .input,
-  body > #output {
-    padding: 32px;
-  }
-}
-
 input,
 button {
-  border-radius: 4px;
-  padding: 0.5rem;
-  border: 0;
   transition: background 0.25s;
 }
 
@@ -95,9 +30,6 @@ button {
   user-select: none;
   color: white;
   box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.75);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
 }
 
 button * {
@@ -122,21 +54,7 @@ button:hover {
   transition: background 0s;
 }
 
-input:not(:first-child),
-button:not(:first-child) {
-  margin-left: 0.5rem;
-}
-
-.input > *:not(:last-child) {
-  margin-bottom: 1rem;
-}
-
-#phone-num {
-  width: 100%;
-}
-
 #btn-add {
-  width: 100%;
   background: #1565c0;
 }
 
@@ -148,38 +66,8 @@ button:not(:first-child) {
   background: #0e4686;
 }
 
-.inp-group,
-.btn-group {
-  display: flex;
-  margin-bottom: 1rem;
-}
-
-.inp-group {
-  margin-bottom: 1rem;
-}
-
-.inp-name {
-  min-width: 0;
-  flex: 1;
-}
-
-.inp-amount {
-  width: 100px;
-}
-
 .btn-remove {
-  display: flex;
   background: #d32f2f;
-  width: 33px;
-  height: 33px;
-  padding: 0;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn-remove > svg {
-  width: 23px;
-  height: 23px;
 }
 
 .btn-remove:hover {
