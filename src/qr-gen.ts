@@ -17,7 +17,10 @@ export function generate(phone: string, amount: string) {
         29,
         [
           emvField(0, "A000000677010111"),
-          emvField(1, "0066" + phone.substr(-9, 9)),
+          phone.length == 10
+            ? emvField(1, "0066" + phone.substr(-9, 9))
+            : emvField(2, phone)
+          ,
         ].join("")
       ),
       emvField(58, "TH"),
