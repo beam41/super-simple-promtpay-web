@@ -28,5 +28,5 @@ export function generate(phone: string, amount: string) {
       emvField(54, (+amount).toFixed(2)),
     ].join("") + "6304";
 
-  return qr + crc16(qr).toString(16).toUpperCase();
+  return qr + crc16(qr).toString(16).toUpperCase().padStart(4, "0");
 }
